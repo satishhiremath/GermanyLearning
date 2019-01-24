@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# =============================================================================
-# Copyright (C) 2017-2018, Bayerische Motoren Werke Aktiengesellschaft (BMW AG)
-# =============================================================================
-
-#set -eu
-
 echo "Enter folder path to apply clang format. Else it will take present working directory!!!"
 read toplevel
 
