@@ -1,55 +1,6 @@
 -- git config credential.helper store
 
--- Equinix Cluster =>> Login:hiresati   Password:Basket-Above-68
-
 -- sudo apt-get install python-pip python-dev build-essential --- if we get pip issues while installing pyspark
-
---  hdfs dfs -ls  ---  folder list on cluster
-	hdfs dfs -ls /processed/datateam/ingestor_v4/*/Lidar/*.orc 
-
-------------------------------
-BMWRPP:
-------------------------------
-
-bmwrpp init-workspace
-
-catkin config --install
-catkin profile set int_release
-catkin config --isolate_int_release
-
--- https://avilpage.com/2016/09/detecting-device-events-in-ubuntu-with-python.html
-
-
-
-bmwrpp setup-catkin-config . Debug
-bmwrpp setup-catkin-config . int_release
-
-catkin profile set default
-catkin profile set int_release
-catkin build bmw_veh_fad_g12_deployment_datacollection 
-
-
-Sprint 8:
-
-
-Prio1 - Status monitor for driving
- 
-Add the new features and add a driving mode into existing android application
-https://codebeamer.bmwgroup.net:8443/cb/issue/50707
- 
-Prio2 – Quick creation of ISO images
- 
-Create an ISO image for the vehicles for quick reproduce of HDD
-https://codebeamer.bmwgroup.net:8443/cb/issue/50698
- 
-Prio3 – Controlling ROS
- 
-Create an application for control ADP functionality installed in the car
-https://codebeamer.bmwgroup.net:8443/cb/issue/50703
-
-
---------------------------------------------------------------------
-
 
 1) Install p7zip-full i.e sudo apt install p7zip-full 
 3) Decompress initrd.lz with "7z e -so ./initrd.lz | cpio -id"    ---  it decompresses initrd.lz into usr, bin,..... folders
@@ -58,12 +9,6 @@ To compress it again go to the init subdirectory and execute:
 4) find | cpio -o -H newc > ../newinitrd
 5) go up one directory
 6) 7z a -m0=lzma:a=1 initrd-mod.lz newinitrd
-
-
-
-bmwrpp-351-Linux-bootstrap.deb
-bmwrpp-351-Linux-ad-full-dev.deb
-
 
 sudo xorriso -as mkisofs -isohybrid-mbr isolinux/isohdpfx.bin -c isolinux/boot.cat -b isolinux/isolinux.bin -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -o ../custom-ubuntu-http.iso .
 
@@ -75,26 +20,26 @@ sudo xorriso -as mkisofs -isohybrid-mbr isolinux/isohdpfx.bin -c isolinux/boot.c
 .deb package creation
 ---------------------------------------------------------------------
 
-mkdir -p Debian/datacollector
-cd Debian/datacollector
+mkdir -p Debian/sample
+cd Debian/sample
 
 #create debian package
-dh_make --native --single --packagename vehfaddatacollector-1.0.0     # i.e. <packageName>-<version>
+dh_make --native --single --packagename sampleDebian-1.0.0     # i.e. <packageName>-<version>
 
 #build first empty package
 dpkg-buildpackage -uc -us                #we will get package.deb file after building
 
 #see contents of generated .deb file
-dpkg -c ../vehFadDatacollector-1.0.0.deb
+dpkg -c ../sampleDebian-1.0.0.deb
 
 #install the empty package on system
-sudo dpkg -i ../vehFadDatacollector-1.0.0.deb
+sudo dpkg -i ../sampleDebian-1.0.0.deb
 
 #to check if package is installed correctly
-dpkg -l | grep vehFad             #'ii' in first column means package is properly installed
+dpkg -l | grep sampleDeb             #'ii' in first column means package is properly installed
 
 #see the contents of installed package
-dpkg -L datacollector          #dpkg -L only works with installed package
+dpkg -L sample          #dpkg -L only works with installed package
 
 #Adding files and updating the changelog. Create folder files/ and use it to mirror Linux filesystem structue. and put script of files inside files/usr/bin/
 mkdir -p files/usr/bin
@@ -109,24 +54,5 @@ cat Debian/changelog
 
 #rebuild and reinstall a package
 dpkg-buildpackage -uc -us
-sudo dpkg -i ../vehFadDatacollector-1.0.0.deb 
-dpkg -l | grep vehFad
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+sudo dpkg -i ../sampleDebian-1.0.0.deb 
+dpkg -l | grep sampleDeb
