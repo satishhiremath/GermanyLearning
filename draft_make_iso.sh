@@ -3,7 +3,7 @@
 ISO_NAME="CUSTOMIZED_UBUNTU"
 BUILD_DIR=./build
 OUTPUT_DIR=./out
-OUTPUT_ISO=bmwadp.iso
+OUTPUT_ISO=<iso_name>.iso
 #OS_ARCH=amd64
 OS_ARCH=i386
 OS_VER=16.04.4
